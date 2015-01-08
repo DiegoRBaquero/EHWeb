@@ -4,13 +4,17 @@ var baseAPI = baseURL + 'api/';
 
 app.config(function ($routeProvider) {
     $routeProvider
-        .when('/EH', {
+        .when('/en hueco', {
             controller: 'ehCtrl',
             templateUrl: 'view/app_eh.html'
         })
         .when('/amigos', {
             controller: 'amigosCtrl',
             templateUrl: 'view/app_amigos.html'
+        })
+        .when('/mi cuenta', {
+            controller: 'cuentaCtrl',
+            templateUrl: 'view/app_cuenta.html'
         })
         .when('/login', {
             controller: 'loginCtrl',
@@ -43,7 +47,7 @@ app.controller('navCtrl', function ($scope, $rootScope, $route, $location, $log,
         if ($rootScope.token === '') {
             return ['login', 'registro'];
         } else {
-            return ['EH', 'amigos', 'mi cuenta', 'salir']
+            return ['en hueco', 'amigos', 'mi cuenta', 'salir']
         }
     };
 
@@ -72,15 +76,64 @@ app.controller('ehCtrl', function ($rootScope, $scope, $log, $route, $routeParam
         smallPictureURL: 'https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xap1/v/t1.0-1/p100x100/10846360_10152902407449313_4495160373544755770_n.jpg?oh=c9c6760ccaa317afa763b328c5d8e641&oe=55094D6B&__gda__=1425639102_cdce0995e8a428bd6b0755ef5825abe1',
         email: 'diego@email.com'
     }];
+
+    $scope.getFriends = function () {
+        $http.post(baseAPI + 'friends', {token: $rootScope.token})
+            .success(function (data) {
+                $scope.friends = data;
+                //$log.log(data);
+            });
+    };
+
+    //$scope.getFriends();
+
 });
 
+/*
+ Controlador de la aplicación
+ */
+app.controller('amigosCtrl', function ($rootScope, $scope, $log, $route, $routeParams, $location, $http, $cookies, $cookieStore) {
+    if ($rootScope.token === '') {
+        $location.path('/login');
+    }
+
+    $scope.friends = [{
+        name: 'Diego',
+        lastName: 'Rodríguez',
+        smallPictureURL: 'https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xap1/v/t1.0-1/p100x100/10846360_10152902407449313_4495160373544755770_n.jpg?oh=c9c6760ccaa317afa763b328c5d8e641&oe=55094D6B&__gda__=1425639102_cdce0995e8a428bd6b0755ef5825abe1',
+        email: 'diego@email.com'
+    }];
+
+    $scope.getFriends = function () {
+        $http.post(baseAPI + 'friends', {token: $rootScope.token})
+            .success(function (data) {
+                $scope.friends = data;
+                //$log.log(data);
+            });
+    };
+
+    $scope.getFriends();
+});
+
+/*
+ Controlador de la aplicación
+ */
+app.controller('cuentaCtrl', function ($rootScope, $scope, $log, $route, $routeParams, $location, $http, $cookies, $cookieStore) {
+    if ($rootScope.token === '') {
+        $location.path('/login');
+    }
+
+    $scope.hours = ['7:00 AM', '7:30 AM', '8:00 AM', '8:30 AM'];
+    $scope.days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+
+});
 
 /*
  Controlador de la aplicación
  */
 app.controller('loginCtrl', function ($rootScope, $scope, $log, $route, $routeParams, $location, $http, $cookies, $cookieStore) {
     if ($rootScope.token !== '') {
-        $location.path('/EH');
+        $location.path('/en hueco');
     }
 
     $scope.formData = {};
@@ -95,7 +148,7 @@ app.controller('loginCtrl', function ($rootScope, $scope, $log, $route, $routePa
             .success(function (data) {
                 $rootScope.token = data.token;
                 $cookies.token = $rootScope.token;
-                $location.path('/EH');
+                $location.path('/en hueco');
             });
     };
 });
@@ -134,7 +187,7 @@ app.controller('registroCtrl', function ($rootScope, $scope, $log, $route, $rout
             .success(function (data) {
                 $rootScope.token = data.token;
                 $cookies.token = $rootScope.token;
-                $location.path('/eh');
+                $location.path('/en hueco');
             });
     };
 });
@@ -225,12 +278,4 @@ app.controller('appCtrl', function ($rootScope, $scope, $log, $route, $routePara
             }
             break;
     }
-});
-
-app.controller('entradaCtrl', function ($scope) {
-    $scope.hola = "HOLA";
-});
-
-app.controller('contactoCtrl', function ($scope, $http) {
-    $scope.hola = "HOLA";
 });

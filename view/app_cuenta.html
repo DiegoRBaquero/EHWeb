@@ -1,0 +1,19 @@
+<div class="container">
+    <div class="row text-center">
+        <h1>Tu cuenta</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-1 col-md-offset-3"><strong>Hora</strong></div>
+        <div class="col-md-1"><strong>Lunes</strong></div>
+        <div class="col-md-1"><strong>Martes</strong></div>
+        <div class="col-md-1"><strong>Miércoles</strong></div>
+        <div class="col-md-1"><strong>Jueves</strong></div>
+        <div class="col-md-1"><strong>Viernes</strong></div>
+    </div>
+    <div class="row" ng-repeat="hour in hours">
+        <div class="col-md-1 col-md-offset-3"><strong>{{hour}}</strong></div>
+        <div class="col-md-1" ng-repeat="day in days">{{day + ' ' + hour}}</div>
+    </div>
+</div>
+<br />
+<br />
