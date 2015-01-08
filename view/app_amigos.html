@@ -1,0 +1,37 @@
+<div class="container">
+    <div class="row text-center">
+        <h1>Tus amigos</h1>
+    </div>
+    <div class="row">
+        <div class="" ng-repeat="friend in friends">
+            <div class="col-md-2 text-center">
+                <img class="img-rounded" ng-src="{{friend.smallPictureURL}}"
+                     alt="{{friend.name + ' ' + friend.lastName}}"/>
+            </div>
+            <div class="col-md-2">
+                <div class="row">
+                    {{friend.name + ' ' + friend.lastName}}
+                </div>
+                <div class="row">
+                    {{friend.email}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row text-center">
+        <h1>Solicitudes</h1>
+    </div>
+    <div class="row text-center">
+        <h1>Agregar un nuevo amigo</h1>
+
+        <form class="form-inline col-md-6 col-md-offset-3" role="form" ng-submit="agregarAmigo()">
+            <div class="form-group">
+                <label class="sr-only" for="addid">Usuario Amigo:</label>
+                <input type="text" id="addid" ng-model="addid" class="form-control" placeholder="p.perez10">
+                <button type="submit" class="btn btn-success">Agregar</button>
+            </div>
+        </form>
+    </div>
+</div>
+<br />
+<br />

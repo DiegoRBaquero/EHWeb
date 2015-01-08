@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html ng-app="enHueco" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="En Hueco">
+    <meta name="author" content="Diego Rodríguez Baquero, Diego Gómez Mosquera, ACM Uniandes">
+    <link rel="shortcut icon" href="ico/favicon.png">
+
+    <title>En Hueco · Un proyecto de ACM Uniandes</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/main.css" rel="stylesheet">
+
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic' rel='stylesheet'
+          type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'>
+
+    <script src="js/jquery.min.js"></script>
+</head>
+
+<body data-spy="scroll" data-offset="0" data-target="#navigation">
+
+<!-- Fixed navbar -->
+<div id="navigation" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#/home"><b>En Hueco</b></a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="#/home">Home</a></li>
+                <li><a href="#/contacto">Contacto</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="app.html">Aplicación</a></li>
+            </ul>
+        </div>
+    </div>
+    <!--/.nav-collapse -->
+
+</div>
+</div>
+
+<div ng-view>view</div>
+
+<div id="c">
+    <div class="container">
+        <p>Un proyecto de <a href="http://acm.uniandes.edu.co">ACM Uniandes</a></p>
+
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="js/bootstrap.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular-route.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular-cookies.js"></script>
+<script src="js/index.js"></script>
+<script>
+    $('.carousel').carousel({
+        interval: 3500
+    })
+</script>
+</body>
+</html>

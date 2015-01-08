@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="col-md-4 col-md-offset-4">
+        <h2 class="text-center">Registro</h2>
+    </div>
+    <div class="col-md-4 col-md-offset-4">
+        <form role="form" ng-submit="register()">
+            <div class="form-group">
+                <label for="username">Usuario:</label>
+                <input type="text" id="user" ng-model="formData.username" class="form-control"
+                       placeholder="p.perez10">
+            </div>
+            <div class="form-group">
+                <label for="password">Contraseña:</label>
+                <input type="password" id="pass" ng-model="formData.password" class="form-control"
+                       placeholder="Contraseña">
+            </div>
+            <div class="form-group">
+                <label for="password">Confirmar contraseña:</label>
+                <input type="password" id="password_confirmation" ng-model="formData.password_confirmation"
+                       class="form-control"
+                       placeholder="Contraseña">
+            </div>
+            <div class="form-group text-center">
+                <button type="submit" class="btn btn-success">Registrarse</button>
+            </div>
+        </form>
+    </div>
+</div>
