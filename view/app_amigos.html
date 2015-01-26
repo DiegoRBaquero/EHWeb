@@ -3,13 +3,12 @@
         <h1>Tus amigos</h1>
     </div>
     <div class="row">
-        <div class="" ng-repeat="friend in friends">
-            <div class="col-md-2 text-center">
-                <img class="img-rounded" ng-src="{{friend.smallPictureURL}}"
-                     alt="{{friend.name + ' ' + friend.lastName}}"/>
+        <div class="col-md-3" ng-repeat="friend in friends">
+            <div class="col-md-5 text-center">
+                <img class="img-rounded img-responsive" ng-src="{{friend.smallPictureURL}}" alt="{{friend.name + ' ' + friend.lastName}}"/>
             </div>
-            <div class="col-md-2">
-                <div class="row">
+            <div class="col-md-7">
+                <div class="row hide-overflow">
                     {{friend.name + ' ' + friend.lastName}}
                 </div>
                 <div class="row">
@@ -18,8 +17,25 @@
             </div>
         </div>
     </div>
-    <div class="row text-center">
-        <h1>Solicitudes</h1>
+    <div class="row">
+        <h1 class="text-center">Solicitudes</h1>
+        <div class="col-md-3" ng-repeat="request in requests">
+            <div class="col-md-5 text-center">
+                <img class="img-rounded img-responsive" ng-src="{{request.smallPictureURL}}" alt="{{request.name + ' ' + request.lastName}}"/>
+            </div>
+            <div class="col-md-7 vertical-center">
+                <div class="row">
+                    {{request.name + ' ' + request.lastName}}
+                </div>
+                <div class="row">
+                    {{request.email}}
+                </div>
+                <div class="row">
+                    <button class="btn btn-xs btn-success">Aceptar</button>
+                    <button class="btn btn-xs btn-danger">Eliminar</button>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="row text-center">
         <h1>Agregar un nuevo amigo</h1>
