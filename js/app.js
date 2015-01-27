@@ -142,8 +142,21 @@ app.controller('cuentaCtrl', function ($rootScope, $scope, $log, $route, $routeP
         $location.path('/login');
     }
 
-    $scope.hours = ['7:00 AM', '7:30 AM', '8:00 AM', '8:30 AM', '9:00 AM', '9:30 AM', '10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM', '12:00 PM', '12:30 PM', '1:00 PM', '1:30 PM', '2:00 PM', '2:30 PM', '3:00 PM', '3:30 PM', '4:00 PM', '4:30 PM', '5:00 PM', '5:30 PM', '6:00 PM', '6:30 PM', '7:00 PM'];
-    $scope.days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+    $scope.hours = ['7:00 AM', '7:30 AM', '8:00 AM', '8:30 AM', '9:00 AM', '9:30 AM', '10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM', '12:00 PM', '12:30 PM', '1:00 PM', '1:30 PM', '2:00 PM', '2:30 PM', '3:00 PM', '3:30 PM', '4:00 PM', '4:30 PM', '5:00 PM', '5:30 PM', '6:00 PM', '6:30 PM', '7:00 PM','7:30 PM','8:00 PM','8:30 PM'];
+    $scope.days = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes'];
+
+    $scope.blocks = [];
+
+    for(var i = 0; i < $scope.hours.length; i++) {
+        $scope.blocks[i] = [];
+        for(var j = 0; j < $scope.days.length; j++) {
+            $scope.blocks[i][j] = false;
+        }
+    }
+
+    $scope.toggle = function(p, i) {
+        $scope.blocks[p][i] = !$scope.blocks[p][i];
+    };
 });
 
 /*

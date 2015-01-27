@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-3" ng-repeat="friend in friends">
             <div class="col-md-5 text-center">
-                <img class="img-rounded img-responsive" ng-src="{{friend.smallPictureURL}}" alt="{{friend.name + ' ' + friend.lastName}}"/>
+                <img class="img-rounded user-img" ng-src="{{friend.smallPictureURL}}" alt="{{friend.name + ' ' + friend.lastName}}"/>
             </div>
             <div class="col-md-7">
                 <div class="row hide-overflow">
@@ -21,7 +21,7 @@
         <h1 class="text-center">Solicitudes</h1>
         <div class="col-md-3" ng-repeat="request in requests">
             <div class="col-md-5 text-center">
-                <img class="img-rounded img-responsive" ng-src="{{request.smallPictureURL}}" alt="{{request.name + ' ' + request.lastName}}"/>
+                <img class="img-rounded user-img" ng-src="{{request.smallPictureURL}}" alt="{{request.name + ' ' + request.lastName}}"/>
             </div>
             <div class="col-md-7 vertical-center">
                 <div class="row">

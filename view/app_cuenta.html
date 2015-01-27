@@ -2,29 +2,27 @@
     <div class="row text-center">
         <h1>Tu cuenta</h1>
     </div>
-    <div id="calendar">
+    <table class="my-table">
+        <thead>
+            <tr>
+                <th>Hora</th>
+                <th class="text-center" ng-repeat="day in days">
+                    {{day}}
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="hour in blocks track by $index">
+                <td><span ng-hide="$odd">{{hours[$index]}}</span></td>
+                <td ng-repeat="hourDay in hour track by $index">
+                    <label class="my-button btn btn-xs" ng-class="{'btn-success': blocks[$parent.$index][$index], 'btn-danger': !blocks[$parent.$index][$index]}" ng-click="toggle($parent.$index, $index)">
+                        <span ng-show="blocks[$parent.$index][$index]">En hueco</span><span ng-hide="blocks[$parent.$index][$index]">Ocupado</span>
+                    </label>
+                </td>
+            </tr>
+        </tbody>
 
-    </div>
+    </table>
 </div>
-<script type="text/javascript">
-    $(document).ready(function() {
-
-        // page is now ready, initialize the calendar...
-
-        $('#calendar').fullCalendar({
-            defaultView: 'agendaWeek',
-            header: null,
-            firstDay: 1,
-            weekends: false,
-            minTime: '07:00:00',
-            maxTime: '21:00:00',
-            allDaySlot: false,
-            allDayText: '',
-
-
-        })
-
-    });
-</script>
 <br/>
 <br/>
