@@ -33,7 +33,7 @@ app.config(function ($routeProvider) {
  Controlador del navbar
  */
 app.controller('navCtrl', function ($scope, $rootScope, $route, $location, $log, $cookies) {
-    $cookies.token = 'hola';
+    //$cookies.token = 'hola';
 
     if ($cookies.token == undefined || $cookies.token == '')
         $rootScope.token = '';
