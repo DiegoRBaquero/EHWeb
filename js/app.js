@@ -1,5 +1,5 @@
 var app = angular.module('enHueco', ['ngRoute', 'ngCookies']);
-var baseURL = 'http://192.168.168.102:8888/';
+var baseURL = 'http://enhueco.virtual.uniandes.edu.co/';
 var baseAPI = baseURL + 'api/';
 
 app.config(function ($routeProvider) {
@@ -142,7 +142,7 @@ app.controller('cuentaCtrl', function ($rootScope, $scope, $log, $route, $routeP
         $location.path('/login');
     }
 
-    $scope.hours = ['7:00 AM', '7:30 AM', '8:00 AM', '8:30 AM', '9:00 AM', '9:30 AM', '10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM', '12:00 PM', '12:30 PM', '1:00 PM', '1:30 PM', '2:00 PM', '2:30 PM', '3:00 PM', '3:30 PM', '4:00 PM', '4:30 PM', '5:00 PM', '5:30 PM', '6:00 PM', '6:30 PM', '7:00 PM','7:30 PM','8:00 PM','8:30 PM'];
+    $scope.hours = ['7:00 AM', '7:30 AM', '8:00 AM', '8:30 AM', '9:00 AM', '9:30 AM', '10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM', '12:00 PM', '12:30 PM', '1:00 PM', '1:30 PM', '2:00 PM', '2:30 PM', '3:00 PM', '3:30 PM', '4:00 PM', '4:30 PM', '5:00 PM', '5:30 PM', '6:00 PM', '6:30 PM'];
     $scope.days = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes'];
 
     $scope.blocks = [];
