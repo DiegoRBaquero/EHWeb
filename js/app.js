@@ -172,7 +172,7 @@ app.controller('loginCtrl', function ($rootScope, $scope, $log, $route, $routePa
     $scope.formData.password = "hola123";
 
     $scope.login = function () {
-        $http.post(baseAPI + 'user/login', {
+        $http.post(baseAPI + 'auth/', {
             login: $scope.formData.username + '@uniandes.edu.co',
             password: $scope.formData.password
         }).success(function (data) {
