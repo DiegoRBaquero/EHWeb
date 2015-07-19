@@ -1,6 +1,6 @@
 var app = angular.module('enHueco', ['ngRoute', 'ngCookies']);
-var baseURL = 'http://enhueco.virtual.uniandes.edu.co/';
-var baseAPI = baseURL + 'api/';
+var baseURL = 'http://192.168.33.125:8080/';
+var baseAPI = baseURL + '';
 
 app.config(function ($routeProvider) {
     $routeProvider
@@ -24,8 +24,16 @@ app.config(function ($routeProvider) {
             controller: 'logoutCtrl',
             templateUrl: 'view/app_salir.html'
         })
+        .when('/inicio', {
+            controller: 'entradaCtrl',
+            templateUrl: 'view/entrada.html'
+        })
+        .when('/contacto', {
+            controller: 'contactoCtrl',
+            templateUrl: 'view/contacto.html'
+        })
         .otherwise({
-            redirectTo: '/login'
+            redirectTo: '/inicio'
         });
 });
 
@@ -33,7 +41,7 @@ app.config(function ($routeProvider) {
  Controlador del navbar
  */
 app.controller('navCtrl', function ($scope, $rootScope, $route, $location, $log, $cookies) {
-    //$cookies.token = 'hola';
+    $cookies.token = 'hola';
 
     if ($cookies.token == undefined || $cookies.token == '')
         $rootScope.token = '';
@@ -41,10 +49,15 @@ app.controller('navCtrl', function ($scope, $rootScope, $route, $location, $log,
         $rootScope.token = $cookies.token;
 
     $scope.isLoggedActions = function () {
+        var actions = [];
         if ($rootScope.token === '') {
-            return ['login'];
+            actions['left'] = ['inicio', 'contacto'];
+            actions['right'] = ['login'];
+            return actions;
         } else {
-            return ['en hueco', 'amigos', 'mi cuenta', 'salir']
+            actions['left'] = ['inicio', 'en hueco', 'amigos', 'contacto'];
+            actions['right'] = ['mi cuenta','salir'];
+            return actions;
         }
     };
 
@@ -194,9 +207,9 @@ app.controller('logoutCtrl', function ($rootScope, $scope, $log, $route, $routeP
     $rootScope.token = '';
     $cookieStore.remove('token');
     $timeout(function () {
-        $location.path('/login');
+        $location.path('/inicio');
         //$window.location.href = "";
-    }, 2000);
+    }, 1000);
 });
 
 /*
@@ -268,4 +281,12 @@ app.controller('appCtrl', function ($rootScope, $scope, $log, $route, $routePara
             }
             break;
     }
+});
+
+app.controller('entradaCtrl', function ($scope) {
+    $scope.hola = "HOLA";
+});
+
+app.controller('contactoCtrl', function ($scope, $http) {
+    $scope.hola = "HOLA";
 });

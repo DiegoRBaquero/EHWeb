@@ -15,8 +15,8 @@
             <tr ng-repeat="hour in blocks track by $index">
                 <td><span ng-hide="$odd">{{hours[$index]}}</span></td>
                 <td ng-repeat="hourDay in hour track by $index">
-                    <label class="my-button btn btn-xs" ng-class="{'btn-success': blocks[$parent.$index][$index], 'btn-danger': !blocks[$parent.$index][$index]}" ng-click="toggle($parent.$index, $index)">
-                        <span ng-show="blocks[$parent.$index][$index]">En hueco</span><span ng-hide="blocks[$parent.$index][$index]">Ocupado</span>
+                    <label class="my-button btn btn-xs" ng-class="{'btn-success': blocks[$parent.$index][$index], 'btn-primary': !blocks[$parent.$index][$index]}" ng-click="toggle($parent.$index, $index)">
+                        <span ng-show="blocks[$parent.$index][$index]">En hueco</span><span ng-hide="blocks[$parent.$index][$index]">------</span>
                     </label>
                 </td>
             </tr>
