@@ -1,38 +1,64 @@
 <div class="container">
-    <div class="row text-center">
-        <h1>Tus amigos</h1>
-    </div>
     <div class="row">
-        <div class="col-md-3" ng-repeat="friend in friends">
-            <div class="col-md-5 text-center">
-                <img class="img-rounded user-img" ng-src="{{friend.smallPictureURL}}" alt="{{friend.name + ' ' + friend.lastName}}"/>
+        <div class="col-md-6">
+            <div class="row text-center">
+                <h1>Tus amigos</h1>
             </div>
-            <div class="col-md-7">
-                <div class="row hide-overflow">
-                    {{friend.name + ' ' + friend.lastName}}
+            <div class="col-md-6" ng-repeat="friend in friends">
+                <div class="col-md-5 text-center">
+                    <img class="img-rounded user-img" ng-src="{{friend.imageURL}}" alt="{{friend.login}}" border="0"/>
                 </div>
-                <div class="row">
-                    {{friend.email}}
+                <div class="col-md-7">
+                    <div class="row hide-overflow">
+                        {{friend.firstNames + ' ' + friend.lastNames | capitalize}}
+                    </div>
+                    <div class="row">
+                        {{friend.login}}
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <h1 class="text-center">Solicitudes</h1>
-        <div class="col-md-3" ng-repeat="request in requests">
-            <div class="col-md-5 text-center">
-                <img class="img-rounded user-img" ng-src="{{request.smallPictureURL}}" alt="{{request.name + ' ' + request.lastName}}"/>
+        <div class="col-md-3">
+            <div class="row text-center">
+                <h3>Solicitudes Recibidas</h3>
             </div>
-            <div class="col-md-7 vertical-center">
-                <div class="row">
-                    {{request.name + ' ' + request.lastName}}
+            <div class="row" ng-repeat="request in requestsReceived">
+                <div class="col-md-5 text-center">
+                    <img class="img-rounded user-img" ng-src="{{request.imageURL}}" alt="{{request.login}}"/>
                 </div>
-                <div class="row">
-                    {{request.email}}
+                <div class="col-md-7 vertical-center">
+                    <div class="row">
+                        {{request.firstNames + ' ' + request.lastNames | capitalize}}
+                    </div>
+                    <div class="row">
+                        {{request.login}}
+                    </div>
+                    <div class="row">
+                        <button class="btn btn-xs btn-success">Aceptar</button>
+                        <button class="btn btn-xs btn-danger">Eliminar</button>
+                    </div>
                 </div>
-                <div class="row">
-                    <button class="btn btn-xs btn-success">Aceptar</button>
-                    <button class="btn btn-xs btn-danger">Eliminar</button>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="row text-center">
+                <h3>Solicitudes Enviadas</h3>
+            </div>
+            <div class="row" ng-repeat="request in requestsSent">
+                <div class="col-md-5 text-center">
+                    <img class="img-rounded user-img" ng-src="{{request.imageURL}}" alt="{{request.login}}"/>
+                </div>
+                <div class="col-md-7 vertical-center">
+                    <div class="row">
+                        {{request.firstNames + ' ' + request.lastNames | capitalize}}
+                    </div>
+                    <div class="row">
+                        {{request.login}}
+                    </div>
+                    <div class="row">
+                        <button class="btn btn-xs btn-success">Aceptar</button>
+                        <button class="btn btn-xs btn-danger">Eliminar</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -43,7 +69,7 @@
         <form class="form-inline col-md-6 col-md-offset-3" role="form" ng-submit="agregarAmigo()">
             <div class="form-group">
                 <label class="sr-only" for="addid">Usuario Amigo:</label>
-                <input type="text" id="addid" ng-model="addid" class="form-control" placeholder="p.perez10">
+                <input type="text" id="addid" ng-model="formData.addid" class="form-control" placeholder="p.perez10">
                 <button type="submit" class="btn btn-success">Agregar</button>
             </div>
         </form>

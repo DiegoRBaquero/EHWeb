@@ -1,5 +1,5 @@
 var app = angular.module('enHueco', ['ngRoute', 'ngCookies']);
-var baseURL = 'http://192.168.33.125:8080/';
+var baseURL = 'http://enhueco.uniandes.edu.co:8000/';
 var baseAPI = baseURL + '';
 
 app.config(function ($routeProvider) {
@@ -41,12 +41,14 @@ app.config(function ($routeProvider) {
  Controlador del navbar
  */
 app.controller('navCtrl', function ($scope, $rootScope, $route, $location, $log, $cookies) {
-    $cookies.token = 'hola';
+    //$cookies.token = 'hola';
 
     if ($cookies.token == undefined || $cookies.token == '')
         $rootScope.token = '';
-    else
+    else {
         $rootScope.token = $cookies.token;
+        $rootScope.user = $cookies.user;
+    }
 
     $scope.isLoggedActions = function () {
         var actions = [];
@@ -112,39 +114,43 @@ app.controller('amigosCtrl', function ($rootScope, $scope, $log, $route, $routeP
         $location.path('/login');
     }
 
-    $scope.friends = [{
-        name: 'Diego',
-        lastName: 'Rodríguez Baquero',
-        smallPictureURL: 'https://fbcdn-sphotos-e-a.akamaihd.net/hphotos-ak-xap1/v/t1.0-9/10846360_10152902407449313_4495160373544755770_n.jpg?oh=fbf4703fcdf94ae2720207903e944a90&oe=55671833&__gda__=1428679014_e8a7a0e9793828e69e6231df9ced9626',
-        email: 'd.rodriguez13'
-    },{
-        name: 'Diego Alejandro',
-        lastName: 'Gómez Mosquera',
-        smallPictureURL: 'https://scontent-a.xx.fbcdn.net/hphotos-xpa1/v/t1.0-9/1377456_10152974578604740_7067096578609392451_n.jpg?oh=7c440c6edab7b71683aa7c14aff07a54&oe=5555EC47',
-        email: 'da.gomez11'
-    }];
-
-    $scope.requests = [{
-        name: 'Catalina',
-        lastName: 'Rey',
-        smallPictureURL: 'https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xaf1/v/t1.0-1/p320x320/10322595_10152673426329493_2846078378865045722_n.jpg?oh=95665a527627252ae1ee593d9aadb3e7&oe=55585477&__gda__=1432917996_827195b4252d5f02ff33cd2c1163325f',
-        email: 'c.rey10'
-    },{
-        name: 'Catalina',
-        lastName: 'Rey',
-        smallPictureURL: 'https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xaf1/v/t1.0-1/p320x320/10322595_10152673426329493_2846078378865045722_n.jpg?oh=95665a527627252ae1ee593d9aadb3e7&oe=55585477&__gda__=1432917996_827195b4252d5f02ff33cd2c1163325f',
-        email: 'c.rey10'
-    }];
+    $scope.formData = {};
 
     $scope.getFriends = function () {
-        $http.post(baseAPI + 'friends', {token: $rootScope.token})
+        $http.get(baseAPI + 'friends/', {headers: {'X-USER-ID': $rootScope.user,'X-USER-TOKEN': $rootScope.token}})
             .success(function (data) {
                 $scope.friends = data;
-                //$log.log(data);
+                $log.log(data);
             });
     };
 
+    $scope.getRequestsReceived = function () {
+        $http.get(baseAPI + 'requests/received/', {headers: {'X-USER-ID': $rootScope.user,'X-USER-TOKEN': $rootScope.token}})
+            .success(function (data) {
+                $scope.requestsReceived = data;
+                $log.log(data);
+            });
+    };
+
+    $scope.getRequestsSent = function () {
+        $http.get(baseAPI + 'requests/sent/', {headers: {'X-USER-ID': $rootScope.user,'X-USER-TOKEN': $rootScope.token}})
+            .success(function (data) {
+                $scope.requestsSent = data;
+                $log.log(data);
+            });
+    };
+
+    $scope.agregarAmigo = function() {
+        $log.log($rootScope.user);
+        $http.post(baseAPI + 'friends/' + $scope.formData.addid + '/', {}, {headers: {'X-USER-ID': $rootScope.user,'X-USER-TOKEN': $rootScope.token}})
+            .success(function (data) {
+                $log.log(data);
+            });
+    }
+
     $scope.getFriends();
+    $scope.getRequestsReceived();
+    $scope.getRequestsSent();
 });
 
 /*
@@ -154,6 +160,13 @@ app.controller('cuentaCtrl', function ($rootScope, $scope, $log, $route, $routeP
     if ($rootScope.token === '') {
         $location.path('/login');
     }
+
+    $scope.getGaps = function () {
+        $http.get(baseAPI + 'gaps/', {headers: {'X-USER-ID': $rootScope.user,'X-USER-TOKEN': $rootScope.token}})
+            .success(function (data) {
+                $log.log(data);
+            });
+    };
 
     $scope.hours = ['7:00 AM', '7:30 AM', '8:00 AM', '8:30 AM', '9:00 AM', '9:30 AM', '10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM', '12:00 PM', '12:30 PM', '1:00 PM', '1:30 PM', '2:00 PM', '2:30 PM', '3:00 PM', '3:30 PM', '4:00 PM', '4:30 PM', '5:00 PM', '5:30 PM', '6:00 PM', '6:30 PM'];
     $scope.days = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes'];
@@ -170,6 +183,8 @@ app.controller('cuentaCtrl', function ($rootScope, $scope, $log, $route, $routeP
     $scope.toggle = function(p, i) {
         $scope.blocks[p][i] = !$scope.blocks[p][i];
     };
+
+    $scope.getGaps();
 });
 
 /*
@@ -186,11 +201,14 @@ app.controller('loginCtrl', function ($rootScope, $scope, $log, $route, $routePa
 
     $scope.login = function () {
         $http.post(baseAPI + 'auth/', {
-            login: $scope.formData.username + '@uniandes.edu.co',
-            password: $scope.formData.password
+            'user_id': $scope.formData.username,
+            'password': $scope.formData.password
         }).success(function (data) {
-            $rootScope.token = data.token;
+            $rootScope.token = data.value;
+            $rootScope.user = data.user;
+            $log.log($rootScope);
             $cookies.token = $rootScope.token;
+            $cookies.user = $rootScope.user;
             $location.path('/en hueco');
         });
     };
@@ -289,4 +307,12 @@ app.controller('entradaCtrl', function ($scope) {
 
 app.controller('contactoCtrl', function ($scope, $http) {
     $scope.hola = "HOLA";
+});
+
+app.filter('capitalize', function() {
+    return function(input, scope) {
+        if (input!=null)
+            input = input.toLowerCase();
+        return input.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+    }
 });
