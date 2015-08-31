@@ -1,5 +1,5 @@
 var app = angular.module('enHueco', ['ngRoute', 'ngCookies']);
-var baseURL = 'http://enhueco.uniandes.edu.co:8000/';
+var baseURL = 'http://enhueco.uniandes.edu.co/';
 var baseAPI = baseURL + '';
 
 app.config(function ($routeProvider) {
@@ -82,7 +82,7 @@ app.controller('ehCtrl', function ($rootScope, $scope, $log, $route, $routeParam
         $location.path('/login');
     }
 
-    $scope.friends = [{
+    /*$scope.friends = [{
         name: 'Diego',
         lastName: 'Rodríguez Baquero',
         smallPictureURL: 'https://fbcdn-sphotos-e-a.akamaihd.net/hphotos-ak-xap1/v/t1.0-9/10846360_10152902407449313_4495160373544755770_n.jpg?oh=fbf4703fcdf94ae2720207903e944a90&oe=55671833&__gda__=1428679014_e8a7a0e9793828e69e6231df9ced9626',
@@ -92,10 +92,10 @@ app.controller('ehCtrl', function ($rootScope, $scope, $log, $route, $routeParam
         lastName: 'Gómez Mosquera',
         smallPictureURL: 'https://scontent-a.xx.fbcdn.net/hphotos-xpa1/v/t1.0-9/1377456_10152974578604740_7067096578609392451_n.jpg?oh=7c440c6edab7b71683aa7c14aff07a54&oe=5555EC47',
         email: 'diegog@email.com'
-    }];
+    }];*/
 
     $scope.getFriends = function () {
-        $http.post(baseAPI + 'friends', {token: $rootScope.token})
+        $http.post(baseAPI + 'gapFriends', {token: $rootScope.token})
             .success(function (data) {
                 $scope.friends = data;
                 //$log.log(data);
@@ -173,9 +173,9 @@ app.controller('cuentaCtrl', function ($rootScope, $scope, $log, $route, $routeP
 
     $scope.blocks = [];
 
-    for(var i = 0; i < $scope.hours.length; i++) {
+    for(var i = 0; i < $scope.days.length; i++) {
         $scope.blocks[i] = [];
-        for(var j = 0; j < $scope.days.length; j++) {
+        for(var j = 0; j < $scope.hours.length; j++) {
             $scope.blocks[i][j] = false;
         }
     }
