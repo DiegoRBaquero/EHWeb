@@ -316,3 +316,51 @@ app.filter('capitalize', function() {
         return input.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
     }
 });
+
+$(document).ready(function() {
+
+    // page is now ready, initialize the calendar...
+
+    $('#calendar').fullCalendar({
+        defaultView: 'agendaWeek',
+        weekNumbers: false,
+        editable: true,
+        weekends: false,
+        header : false,
+        height: "auto",
+        minTime: "07:00:00",
+        maxTime: "19:00:00",
+        eventOverlap: false,
+        allDayText : "día completo",
+        //slotLabelInterval: moment.duration(30, 'minutes'),
+        events: [
+
+        ],
+
+        eventRender: function (event, element) {
+            element.bind('mousedown', function (e) {
+                if (e.which == 3) {
+                    $('#calendar').fullCalendar( 'removeEvents', event.id);
+                }
+            });
+        },
+
+        dayClick: function(date, jsEvent, view) {
+
+            endDate = moment(date).add(30, 'm')
+            var myEvent = {
+                start: date,
+                end: endDate,
+                id: Math.floor(Math.random()*1000)
+            };
+            $('#calendar').fullCalendar( 'renderEvent', myEvent, true );
+
+
+        }
+
+
+
+    });
+
+
+});
